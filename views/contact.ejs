@@ -1,0 +1,23 @@
+<%- include('./partials/header.ejs') %>
+    <main>
+        <h1>Contact UniFiesta</h1>
+        <div class="info">
+            <p>Thank you for your interest in UniFiesta! Whether you have questions, feedback, or just want to say hello, we'd love to hear from you. You can reach us through the following channels:</p>
+            <ul>
+                <li>Email: info@unifiesta.edu</li>
+                <li>Phone: +1 (123) 456-7890</li>
+                <li>Address: University of North Carolina at Charlotte</li>
+            </ul>
+            <p>Alternatively, you can fill out the form below, and we'll get back to you as soon as possible:</p>
+            <form action="/contact" method="GET">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </main>
+<%- include('./partials/footer.ejs') %>

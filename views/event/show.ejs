@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <h1>UniFiesta Event Details</h1>
+
+        <div class="event-details">
+            <% if(!user || (user && user._id != event.host._id)){ %>
+                <p>Going? </p>
+                <form class="action-buttons">
+                    <button class="edit-button" name="status" value="YES" formmethod="post" formaction="/events/<%= event._id %>/rsvp">Yes</button>
+                    <button class="edit-button" name="status" value="NO" formmethod="post" formaction="/events/<%= event._id %>/rsvp">No</button>
+                    <button class="edit-button" name="status" value="MAYBE" formmethod="post" formaction="/events/<%= event._id %>/rsvp">May be</button>
+                </form>
+            <% } %>
+
+            <div id="event-category"><%= event.category %></div>
+            <div id="event-subheading"><%= event.title %></div>
+
+            <div id="image-container">
+                <img src="../<%= event.image %>" class="event-img" alt="<%= event.title %>">
+            </div>
+
+            <div class="highlight-section">
+                <div class="highlight-title">Hosted by:</div>
+                <div id="host"><%= event.host.firstName + " " + event.host.lastName %></div>
+            </div>
+
+            <div class="highlight-section">
+                <div class="highlight-title">Date and Time:</div>
+                <div id="start-time">Start: <%= formatDate(event.startTime) %></div>
+                <div id="end-time">End: <%= formatDate(event.endTime) %></div>
+            </div>
+
+            <div class="highlight-section">
+                <div class="highlight-title">Location:</div>
+                <div id="loc"><%= event.loc %></div>
+            </div>
+
+            <div class="event-description">
+                <div class="highlight-title">Description:</div>
+                <p id="description"><%= event.description %></p>
+            </div>
+
+            <div class="event-description">
+                <div class="highlight-title">Number of Rsvps:</div>
+                <p id="description"><%= count %></p>
+            </div>
+
+            <% if(user && user._id == event.host._id){ %>
+                <form class="action-buttons">
+                    <button class="edit-button" formmethod="get" formaction="/events/<%= event._id %>/edit">Edit Event</button>
+                    <button class="delete-button" formmethod="post" formaction="/events/<%= event._id %>?_method=DELETE">Delete Event</button>
+                </form>
+            <% } %>
+        </div>
+    </main>
+<%- include('../partials/footer.ejs') %>

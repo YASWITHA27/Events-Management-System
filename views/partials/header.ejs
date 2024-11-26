@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UniFiesta</title>
+        <link rel="stylesheet" href="/css/contact.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/events.css">
+        <link rel="stylesheet" href="/css/event.css">
+        <script src="https://kit.fontawesome.com/eaf7e6de13.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/">
+                <div class="logo-container">
+                    <img class="logo" src="/images/logo.jpeg" alt="uncc-logo">
+                    <h1>Unifiesta</h1>
+                </div>
+            </a>
+            <div class="user-nav">
+                <% if(user && user._id) {%>
+                    <a href="/events/new" class="new-connection">New Event</a>
+                    <a href="/users/logout" class="login-button">Logout</a>
+                <% } else {%>
+                    <a href="/users/login" class="login-button">Login</a>
+                    <a href="/users/new" class="signup-button">SignUp</a>
+                <% } %>
+            </div>
+        </header>
+        <nav>
+            <a href="/events">Events</a>
+            <% if(user && user._id) {%>
+                <a href="/users/profile"><%= user.firstName + " 's" %> Profile</a>
+            <% } %>
+        </nav>
+        <% if(errorMessages.length > 0) {%>
+            <% errorMessages.forEach(message=>{%>
+                <div class='error' id="errorMessage">
+                    <%=message%>
+                </div>
+            <%});%>
+        <%}%>
+        
+        <% if(successMessages.length > 0) {%>
+            <% successMessages.forEach(message=>{%>
+                <div class='success' id="successMessage">
+                    <%=message%>
+                </div>
+            <%});%>
+        <%}%>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                function hideFlashMessage(messageId, delay) {
+                    setTimeout(function() {
+                        var message = document.getElementById(messageId);
+                        if (message) {
+                            message.style.display = "none";
+                        }
+                    }, delay);
+                }
+            
+                hideFlashMessage("successMessage", 5000);
+                hideFlashMessage("errorMessage", 5000);
+            });
+            </script>

@@ -1,0 +1,54 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <h1>Welcome <%= user.firstName %></h1>
+        <% if (Object.keys(events).length > 0) { %>
+            <% let categories = Object.keys(events); %>
+            <% for (let i = 0; i < categories.length; i += 2) { %>
+                <% let category = categories[i]; %>
+                <div class="event-row">
+                    <div class="event-category">
+                        <img src="../<%= categoryImages.get(category) %>" alt="<%= category %>" class="event-image">
+                        <div class="event-content">
+                            <div class="event-title"><%= category %></div>
+                            <ul class="event-list">
+                                <% events[category].forEach((event) => { %>
+                                    <li class="event-list-item">
+                                        <a href="/events/<%= event._id %>" class="event-link"><%= event.title %></a>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    </div>
+                    <% if (i + 1 < categories.length) { %>
+                        <% category = categories[i+1]; %>
+                        <div class="event-category">
+                            <img src="../<%= categoryImages.get(category) %>" alt="<%= category %>" class="event-image">
+                            <div class="event-content">
+                                <div class="event-title"><%= category %></div>
+                                <ul class="event-list">
+                                    <% events[category].forEach((event) => { %>
+                                        <li class="event-list-item">
+                                            <a href="/events/<%= event._id %>" class="event-link"><%= event.title %></a>
+                                        </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        <% } else { %>
+            <h1>You don't have any events to view.</h1>
+        <% } %>
+        <% if (rsvpEvents.length > 0) { %>
+            <h1>RSVP Events</h1>
+            <ul>
+                <% rsvpEvents.forEach(function(rsvp) { %>
+                    <li><a href="/events/<%= rsvp.eventId %>" class="event-link"><%= rsvp.eventName %></a> - <%= rsvp.s %></li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <h1>You don't have RSVP events to view.</h1>
+        <% } %>
+    </main>
+<%- include('../partials/footer.ejs') %>

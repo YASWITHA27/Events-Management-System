@@ -1,0 +1,30 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <h1>Sign Up</h1>
+        <form method="post" action="/users">
+            
+            <div class="form-input">
+                <label for="firstName">First Name</label>
+                <input type="text" placeholder="Enter first name" name="firstName" id="firstName" required>
+            </div>
+
+            <div class="form-input">
+                <label for="lastName">Last Name</label>
+                <input type="text" placeholder="Enter last name" name="lastName" id="lastName" required>
+            </div>
+
+            <div class="form-input">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Enter email" name="email" id="email" required>
+            </div>
+
+            <div class="form-input">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter password" minlength="8" maxlength="64" name="password" id="password" required>
+            </div>
+            <div class="btn">
+                <button class="submit-btn" type="submit">Sign Up</button>
+            </div>
+        </form>
+    </main>
+<%- include('../partials/footer.ejs') %>

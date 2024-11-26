@@ -1,0 +1,50 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <h1>Edit Event</h1>
+        <form method = "POST" action = "/events/<%= event._id%>?_method=PUT" enctype="multipart/form-data">
+            <div class="form-input">
+                <label for="category">Category</label>
+                <select name="category" id="category" required>
+                    <option value="Sports Extravaganza" <%= event.category === 'Sports Extravaganza' ? 'selected' : '' %>>Sports Extravaganza</option>
+                    <option value="Board Game Bonanza" <%= event.category === 'Board Game Bonanza' ? 'selected' : '' %>>Board Game Bonanza</option>
+                    <option value="Cultural Carnival" <%= event.category === 'Cultural Carnival' ? 'selected' : '' %>>Cultural Carnival</option>
+                    <option value="Tech Symposium" <%= event.category === 'Tech Symposium' ? 'selected' : '' %>>Tech Symposium</option>
+                    <option value="Other" <%= event.category === 'Other' ? 'selected' : '' %>>Other</option>
+                </select>                
+            </div>
+            
+            <div class="form-input">
+                <label for="title">Title</label>
+                <input type="text" placeholder="Enter the title of your event" name="title" id="title" value="<%= event.title %>" required>
+            </div>
+
+            <div class="form-input">
+                <label for="description">Details</label>
+                <input type="text" placeholder="Enter the details of your event" name="description" id="description" value="<%= event.description %>" required>
+            </div>
+
+            <div class="form-input">
+                <label for="loc">Where</label>
+                <input type="text" placeholder="Enter the location of your event" name="loc" id="loc" value="<%= event.loc %>" required>
+            </div>
+
+            <div class="form-input">
+                <label for="startTime">Start</label>
+                <input type="datetime-local" name="startTime" id="startTime" value="<%= new Date(event.startTime).toISOString().slice(0, 16) %>" required>
+            </div>
+
+            <div class="form-input">
+                <label for="endTime">End</label>
+                <input type="datetime-local" name="endTime" id="endTime" value="<%= new Date(event.endTime).toISOString().slice(0, 16) %>" required>
+            </div>
+
+            <div class="form-input">
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <div class="btn">
+                <button class="submit-btn" type="submit">Edit Event</button>
+            </div>
+        </form>
+    </main>
+<%- include('../partials/footer.ejs') %>
